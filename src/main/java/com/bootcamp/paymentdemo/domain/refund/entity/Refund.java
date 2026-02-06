@@ -17,8 +17,8 @@ public class Refund extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long refundId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "payment_id", nullable = false)
     private Payment payment;
 
     private Long price;
