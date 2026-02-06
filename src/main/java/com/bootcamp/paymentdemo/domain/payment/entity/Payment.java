@@ -24,7 +24,7 @@ public class Payment extends Base {
     private Long paymentId;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @Column(nullable = false, updatable = false, length = 120)
