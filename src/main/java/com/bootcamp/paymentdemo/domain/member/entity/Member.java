@@ -42,6 +42,9 @@ public class Member extends Base {
     private LocalDateTime grade_at;
 
     @Column(nullable = false)
+    private Integer point;
+
+    @Column(nullable = false)
     private boolean deleted;
 
     private LocalDateTime deleted_at;
