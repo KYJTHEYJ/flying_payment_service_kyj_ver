@@ -32,11 +32,11 @@ public class ProductOrder extends Base {
     private boolean deleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name ="order_id", nullable = false)
     private Order order;
 
     private LocalDateTime deletedAt;
