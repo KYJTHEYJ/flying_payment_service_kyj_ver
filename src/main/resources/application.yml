@@ -2,6 +2,10 @@ spring:
   application:
     name: payment-demo
 
+  profiles:
+    active: local
+
+
   # 클라이언트 API 계약 설정 파일 import
   config:
     import: optional:classpath:client-api-config.yml
@@ -17,6 +21,17 @@ spring:
     user:
       name: demo
       password: demo123
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 8080

@@ -1,6 +1,6 @@
-package com.bootcamp.paymentdemo.config;
+package com.bootcamp.paymentdemo.common.config;
 
-import com.bootcamp.paymentdemo.security.JwtAuthenticationFilter;
+import com.bootcamp.paymentdemo.common.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

@@ -1,4 +1,4 @@
-package com.bootcamp.paymentdemo.security;
+package com.bootcamp.paymentdemo.common.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

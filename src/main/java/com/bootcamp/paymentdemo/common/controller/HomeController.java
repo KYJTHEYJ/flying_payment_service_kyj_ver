@@ -1,4 +1,4 @@
-package com.bootcamp.paymentdemo.controller;
+package com.bootcamp.paymentdemo.common.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
