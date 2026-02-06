@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum OrderStatus {
 
-    PENDING("준비중"),
-    COMPLETE("완료"),
-    REFUNDED("환불처리");
-
-    private final String value;
+    PENDING,
+    COMPLETE,
+    REFUNDED
 }

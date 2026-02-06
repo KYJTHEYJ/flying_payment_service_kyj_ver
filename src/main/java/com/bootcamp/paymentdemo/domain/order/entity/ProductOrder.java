@@ -4,8 +4,6 @@ package com.bootcamp.paymentdemo.domain.order.entity;
 import com.bootcamp.paymentdemo.common.entity.Base;
 import com.bootcamp.paymentdemo.domain.product.entity.Product;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +19,13 @@ public class ProductOrder extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productOrderId;
 
-    @NotBlank
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     private Long price;
 
-    @NotNull
+    @Column(nullable = false)
     private Long quantity;
 
     @Column(nullable = false)
@@ -45,17 +42,23 @@ public class ProductOrder extends Base {
     @JoinColumn(nullable = false)
     private Order order;
 
-    public ProductOrder(
+    public static ProductOrder register(
+            Product product,
+            Order order,
             String name,
             Long price,
-            Long quantity,
-            Boolean deleted,
-            LocalDateTime deletedAt
+            Long quantity
     ) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.deleted = deleted;
-        this.deletedAt = deletedAt;
+        ProductOrder productOrder = new ProductOrder();
+
+        productOrder.product = product;
+        productOrder.order = order;
+        productOrder.name = name;
+        productOrder.price = price;
+        productOrder.quantity = quantity;
+        productOrder.deleted = false;
+        productOrder.deletedAt = null;
+
+        return productOrder;
     }
 }

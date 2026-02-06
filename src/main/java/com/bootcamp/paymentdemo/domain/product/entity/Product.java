@@ -2,8 +2,6 @@ package com.bootcamp.paymentdemo.domain.product.entity;
 
 import com.bootcamp.paymentdemo.common.entity.Base;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,47 +17,51 @@ public class Product extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-    @NotBlank
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotBlank
     @Column(nullable = false, length = 50)
     private String category;
 
-    @NotBlank
     @Column(nullable = false, length = 225)
     private String description;
 
     @Column(nullable = false)
     private boolean deleted;
 
-    @NotNull
+    @Column(nullable = false)
     private Long price;
+
+    @Column(nullable = false)
     private Long stock;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
+    @Column(nullable = false)
     private LocalDateTime deletedAt;
 
-    public Product(
+    public static Product register(
             String name,
             String category,
             String description,
-            Boolean deleted,
             Long price,
             Long stock,
             ProductStatus status
     ) {
-        this.name = name;
-        this.category = category;
-        this.description = description;
-        this.deleted = deleted;
-        this.price = price;
-        this.stock = stock;
-        this.status = status;
+        Product product = new Product();
+
+        product.name = name;
+        product.category = category;
+        product.description = description;
+        product.price = price;
+        product.stock = stock;
+        product.status = status;
+        product.deleted = false;
+        product.deletedAt = null;
+
+        return product;
     }
 
 }

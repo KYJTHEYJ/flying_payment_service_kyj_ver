@@ -45,26 +45,28 @@ public class Order extends Base {
     @Column(nullable = false)
     private LocalDateTime cancelAt;
 
-    public Order(
+    public static Order register(
             String orderNo,
             Integer totalPrice,
             Integer price,
             Integer usePoint,
             Integer savePoint,
             OrderStatus status,
-            Boolean deleted,
-            LocalDateTime orderDate,
-            LocalDateTime cancelAt
+            LocalDateTime orderDate
     ) {
-        this.orderNo = orderNo;
-        this.totalPrice = totalPrice;
-        this.price = price;
-        this.usePoint = usePoint;
-        this.savePoint = savePoint;
-        this.status = status;
-        this.deleted = deleted;
-        this.orderDate = orderDate;
-        this.cancelAt = cancelAt;
+        Order order = new Order();
+
+        order.orderNo = orderNo;
+        order.totalPrice = totalPrice;
+        order.price = price;
+        order.usePoint = usePoint;
+        order.savePoint = savePoint;
+        order.status = status;
+        order.orderDate = orderDate;
+        order.deleted = false;
+        order.cancelAt = null;
+
+        return order;
     }
 
 }
