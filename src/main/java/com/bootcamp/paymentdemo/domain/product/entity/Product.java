@@ -39,7 +39,6 @@ public class Product extends Base {
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
-    @Column(nullable = false)
     private LocalDateTime deletedAt;
 
     public static Product register(

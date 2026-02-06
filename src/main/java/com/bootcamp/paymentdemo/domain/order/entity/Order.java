@@ -39,11 +39,8 @@ public class Order extends Base {
     @Column(nullable = false)
     private boolean deleted;
 
-    @Column(nullable = false)
-    private LocalDateTime orderDate;
-
-    @Column(nullable = false)
-    private LocalDateTime cancelAt;
+    private LocalDateTime orderAt;
+    private LocalDateTime deletedAt;
 
     public static Order register(
             String orderNo,
@@ -52,7 +49,7 @@ public class Order extends Base {
             Integer usePoint,
             Integer savePoint,
             OrderStatus status,
-            LocalDateTime orderDate
+            LocalDateTime orderAt
     ) {
         Order order = new Order();
 
@@ -62,9 +59,9 @@ public class Order extends Base {
         order.usePoint = usePoint;
         order.savePoint = savePoint;
         order.status = status;
-        order.orderDate = orderDate;
+        order.orderAt = orderAt;
         order.deleted = false;
-        order.cancelAt = null;
+        order.deletedAt = null;
 
         return order;
     }

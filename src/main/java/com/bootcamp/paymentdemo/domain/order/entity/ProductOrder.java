@@ -20,19 +20,16 @@ public class ProductOrder extends Base {
     private Long productOrderId;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String nameSnap;
 
     @Column(nullable = false)
-    private Long price;
+    private Long priceSnap;
 
     @Column(nullable = false)
     private Long quantity;
 
     @Column(nullable = false)
     private boolean deleted;
-
-    @Column(nullable = false)
-    private LocalDateTime deletedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
@@ -42,19 +39,21 @@ public class ProductOrder extends Base {
     @JoinColumn(nullable = false)
     private Order order;
 
+    private LocalDateTime deletedAt;
+
     public static ProductOrder register(
             Product product,
             Order order,
-            String name,
-            Long price,
+            String nameSnap,
+            Long priceSnap,
             Long quantity
     ) {
         ProductOrder productOrder = new ProductOrder();
 
         productOrder.product = product;
         productOrder.order = order;
-        productOrder.name = name;
-        productOrder.price = price;
+        productOrder.nameSnap = nameSnap;
+        productOrder.priceSnap = priceSnap;
         productOrder.quantity = quantity;
         productOrder.deleted = false;
         productOrder.deletedAt = null;
