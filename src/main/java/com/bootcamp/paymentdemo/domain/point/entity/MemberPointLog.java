@@ -1,16 +1,40 @@
 package com.bootcamp.paymentdemo.domain.point.entity;
 
+import com.bootcamp.paymentdemo.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @Table(name = "member_point_logs")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberPointLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long point_log_id;
+
+    @Column(nullable = false, length = 100)
+    private String orderNo;
+
+    @Column(nullable = false)
+    private Integer point;
+
+    @Column(nullable = false)
+    private LocalDateTime save_at;
+
+    @Column(nullable = false)
+    private LocalDateTime expire_at;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private MemberPointLogStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 }
