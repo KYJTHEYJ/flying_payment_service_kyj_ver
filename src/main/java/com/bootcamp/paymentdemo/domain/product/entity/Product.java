@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Entity
 @Table(name = "products")
@@ -14,4 +16,51 @@ public class Product extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(nullable = false, length = 50)
+    private String category;
+
+    @Column(nullable = false, length = 225)
+    private String description;
+
+    @Column(nullable = false)
+    private boolean deleted;
+
+    @Column(nullable = false)
+    private Long price;
+
+    @Column(nullable = false)
+    private Long stock;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProductStatus status;
+
+    private LocalDateTime deletedAt;
+
+    public static Product register(
+            String name,
+            String category,
+            String description,
+            Long price,
+            Long stock,
+            ProductStatus status
+    ) {
+        Product product = new Product();
+
+        product.name = name;
+        product.category = category;
+        product.description = description;
+        product.price = price;
+        product.stock = stock;
+        product.status = status;
+        product.deleted = false;
+        product.deletedAt = null;
+
+        return product;
+    }
+
 }
