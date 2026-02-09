@@ -8,6 +8,7 @@ public class Constants {
     public static final String ADMIN_SESSION_NAME = "loginAdmin";
     //region 도메인 오류 메세지
     public static final String MSG_NOT_FOUND_MEMBER = "회원을 찾을 수 없습니다";
+    public static final String MSG_NOT_FOUND_PRODUCT = "상품을 찾을 수 없습니다";
     //endregion 도메인 오류 메세지
 
     //region 서버 오류 메세지

@@ -1,5 +1,7 @@
 package com.bootcamp.paymentdemo.domain.product.service;
 
+import com.bootcamp.paymentdemo.common.exception.ErrorEnum;
+import com.bootcamp.paymentdemo.common.exception.ServiceErrorException;
 import com.bootcamp.paymentdemo.domain.product.dto.ProductGetResponse;
 import com.bootcamp.paymentdemo.domain.product.entity.Product;
 import com.bootcamp.paymentdemo.domain.product.repository.ProductRepository;
@@ -37,7 +39,7 @@ public class ProductService {
     @Transactional(readOnly = true)
     public ProductGetResponse findOne(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("존재하지 않은 상품입니다.")
+                () -> new ServiceErrorException(ErrorEnum.ERR_NOT_FOUND_PRODUCT)
         );
         return new ProductGetResponse(
                 product.getId(),
