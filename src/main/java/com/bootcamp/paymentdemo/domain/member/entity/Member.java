@@ -55,7 +55,7 @@ public class Member extends Base {
     @Column(nullable = false)
     private boolean deleted;
 
-    private LocalDateTime deleted_at;
+    private LocalDateTime deletedAt;
 
     private String refreshToken;
 
