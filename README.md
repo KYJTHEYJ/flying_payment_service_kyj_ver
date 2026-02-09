@@ -1,3 +1,10 @@
+# 결제 연동 API 구현
+- 고정된 프론트 엔드 템플릿을 통하여 API 구현에 중점을 두고 개발
+- PortOne 이용 구현
+
+
+<details>
+  <summary>템플릿 정보</summary>
 # 💳 CommerceHub - 결제/구독 UI 템플릿
 
 > 부트캠프용 프론트엔드 UI 템플릿 - Spring Boot + Thymeleaf + PortOne
@@ -906,3 +913,4 @@ api:
 ---
 
 **💡 Tip**: `client-api-config.yml`에 `url` 필드를 추가하면 프론트엔드가 자동으로 해당 API를 호출할 수 있습니다!
+</details>
