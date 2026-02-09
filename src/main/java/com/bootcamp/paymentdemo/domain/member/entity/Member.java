@@ -74,4 +74,41 @@ public class Member extends Base {
         member.deleted = false;
         return member;
     }
+
+    public void addPoint(Integer amount) {
+        this.point += amount;
+    }
+
+    public void minusPoint(Integer amount) {
+        this.point -= amount;
+    }
+
+    public void addTotalPriceAmount(Integer amount) {
+        if (amount == null || amount < 0) return;
+
+        if (this.totalPriceAmount == null) {
+            this.totalPriceAmount = 0;
+        }
+        this.totalPriceAmount += amount;
+    }
+
+    public void subtractTotalPriceAmount(Integer amount) {
+        if (amount == null || amount < 0) return;
+
+        if (this.totalPriceAmount == null) {
+            this.totalPriceAmount = 0;
+        }
+
+        // 누적 금액이 차감액보다 적으면 0으로 초기화 (음수 방지)
+        if (this.totalPriceAmount >= amount) {
+            this.totalPriceAmount -= amount;
+        } else {
+            this.totalPriceAmount = 0;
+        }
+    }
+
+    public void updateGrade(Grade grade) {
+        this.grade = grade;
+        this.gradeAt = LocalDateTime.now();
+    }
 }

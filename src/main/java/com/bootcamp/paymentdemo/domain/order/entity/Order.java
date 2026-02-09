@@ -2,6 +2,7 @@ package com.bootcamp.paymentdemo.domain.order.entity;
 
 import com.bootcamp.paymentdemo.common.entity.Base;
 import com.bootcamp.paymentdemo.domain.payment.entity.Payment;
+import com.bootcamp.paymentdemo.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,6 +18,10 @@ public class Order extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Column(nullable = false)
     private String orderNo;
@@ -47,6 +52,7 @@ public class Order extends Base {
     private LocalDateTime deletedAt;
 
     public static Order register(
+            Member member,
             String orderNo,
             Integer totalPrice,
             Integer price,
@@ -56,7 +62,7 @@ public class Order extends Base {
             LocalDateTime orderAt
     ) {
         Order order = new Order();
-
+        order.member = member;
         order.orderNo = orderNo;
         order.totalPrice = totalPrice;
         order.price = price;
@@ -68,6 +74,14 @@ public class Order extends Base {
         order.deletedAt = null;
 
         return order;
+    }
+
+    public void updateStatus(OrderStatus status) {
+        this.status = status;
+        if(status == OrderStatus.REFUNDED) {
+            this.deleted = true;
+            this.deletedAt = LocalDateTime.now();
+        }
     }
 
 }

@@ -71,4 +71,11 @@ public class Payment extends Base {
         deleted = false;
         deletedAt = null;
     }
+
+    public void updateStatus(PaymentStatus status) {
+        this.status = status;
+        if (status == PaymentStatus.REFUNDED) {
+            this.refundAt = LocalDateTime.now();
+        }
+    }
 }
