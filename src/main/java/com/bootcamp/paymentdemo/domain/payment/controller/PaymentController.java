@@ -20,9 +20,8 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     //FIXME 결제창이 뜨지 못할 경우 -> 스케줄러?
-    //FIXME 사용자가 결제를 취소할 경우 -> 동일 건 재결제 어떻게?
 
-    //TODO Valid 처리는 테스트 이후
+    //TODO Valid 처리는 어느정도 완성 이후 적용 예정
     @PostMapping
     public ResponseEntity<CreatePaymentResponse> createPayment(@RequestBody CreatePaymentRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.createPayment(request));

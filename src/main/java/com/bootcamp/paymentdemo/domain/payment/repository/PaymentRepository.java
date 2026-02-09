@@ -11,9 +11,9 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     @Query("""
             SELECT p
             FROM Payment p
-            JOIN FETCH Order o
+            JOIN FETCH p.order o
             WHERE p.deleted = false
-            AND p.status = "PENDING"
+            AND p.status = 'PENDING'
             AND o.orderId = :orderId
           """)
     Optional<Payment> findByOrderId(Long orderId);
