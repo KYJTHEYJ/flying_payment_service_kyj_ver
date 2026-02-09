@@ -18,12 +18,21 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     // 구현 : 상품 목록 조회, 상품 단건 조회
-
     @Transactional(readOnly = true)
     public List<ProductGetResponse> findAll() {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(ProductGetResponse::register)
+                .map(product ->
+                    ProductGetResponse.register(
+                            product.getId()
+                            , product.getName()
+                            , product.getDescription()
+                            , product.getCategory()
+                            , product.getPrice()
+                            , product.getStock()
+                            , product.getStatus()
+                    )
+                )
                 .toList();
     }
 
@@ -32,6 +41,6 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ServiceErrorException(ErrorEnum.ERR_NOT_FOUND_PRODUCT)
         );
-        return ProductGetResponse.register(product);
+        return ProductGetResponse.register(product.getId(), product.getName(), product.getDescription(), product.getCategory(), product.getPrice(), product.getStock(), product.getStatus());
     }
 }
