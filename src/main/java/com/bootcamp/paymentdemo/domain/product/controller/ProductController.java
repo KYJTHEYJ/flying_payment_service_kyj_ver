@@ -3,8 +3,6 @@ package com.bootcamp.paymentdemo.domain.product.controller;
 import com.bootcamp.paymentdemo.domain.product.dto.ProductGetResponse;
 import com.bootcamp.paymentdemo.domain.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

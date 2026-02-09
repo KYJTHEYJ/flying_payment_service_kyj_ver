@@ -1,7 +1,6 @@
 package com.bootcamp.paymentdemo.domain.product.entity;
 
 import com.bootcamp.paymentdemo.common.entity.Base;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,7 +16,6 @@ public class Product extends Base {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
     private String productUid;
