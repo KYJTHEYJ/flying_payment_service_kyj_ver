@@ -30,11 +30,22 @@ public class MemberPointLog {
     @Column(nullable = false)
     private LocalDateTime expire_at;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 20, nullable = false)
     private MemberPointLogStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    public static MemberPointLog create(String OrderNo, Integer point, MemberPointLogStatus status, Member member) {
+        MemberPointLog log = new MemberPointLog();
+        log.orderNo = OrderNo;
+        log.point = point;
+        log.status = status;
+        log.member = member;
+        log.save_at = LocalDateTime.now();
+        log.expire_at = LocalDateTime.now().plusYears(1);
+        return log;
+    }
 }
