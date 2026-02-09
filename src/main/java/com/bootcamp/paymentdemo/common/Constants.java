@@ -16,6 +16,8 @@ public class Constants {
     public static final String MSG_SERVER_ERROR_OCCUR = "서버 오류가 발생하였습니다, 잠시 후 다시 시도 바랍니다";
     //endregion
 
+    // member 오류 메세지
+    public static final String MSG_DUPLICATE_EMAIL = "중복 된 이메일입니다.";
 }
 
 
