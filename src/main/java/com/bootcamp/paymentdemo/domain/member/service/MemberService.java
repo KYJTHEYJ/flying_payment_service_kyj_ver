@@ -1,10 +1,10 @@
 package com.bootcamp.paymentdemo.domain.member.service;
 
 import com.bootcamp.paymentdemo.common.exception.ErrorEnum;
+import com.bootcamp.paymentdemo.common.exception.ServiceErrorException;
 import com.bootcamp.paymentdemo.domain.member.dto.SaveMemberRequest;
 import com.bootcamp.paymentdemo.domain.member.dto.SaveMemberResponse;
 import com.bootcamp.paymentdemo.domain.member.entity.Member;
-import com.bootcamp.paymentdemo.domain.member.exception.DuplicateEmailException;
 import com.bootcamp.paymentdemo.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +20,7 @@ public class MemberService {
 
     public SaveMemberResponse signup(SaveMemberRequest request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new DuplicateEmailException(ErrorEnum.DUPLICATE_EMAIL);
+            throw new ServiceErrorException(ErrorEnum.ERR_DUPLICATE_EMAIL);
         }
 
         Member member = Member.register(request, passwordEncoder.encode(request.getPassword()));

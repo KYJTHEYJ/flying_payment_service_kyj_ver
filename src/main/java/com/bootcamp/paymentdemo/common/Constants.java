@@ -17,7 +17,7 @@ public class Constants {
     //endregion
 
     // member 오류 메세지
-    public static final String MSG_DUPLICATE_EMAIL = "중복 된 이메일입니다.";
+    public static final String MSG_DUPLICATE_EMAIL = "중복 된 이메일입니다";
 }
 
 
