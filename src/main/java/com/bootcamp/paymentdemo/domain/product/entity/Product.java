@@ -1,6 +1,7 @@
 package com.bootcamp.paymentdemo.domain.product.entity;
 
 import com.bootcamp.paymentdemo.common.entity.Base;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -13,9 +14,11 @@ import java.time.LocalDateTime;
 @Table(name = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product extends Base {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -62,5 +65,4 @@ public class Product extends Base {
 
         return product;
     }
-
 }
