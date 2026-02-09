@@ -35,4 +35,13 @@ public class Webhook {
 
         return webhook;
     }
+
+    public void complete() {
+        this.status = WebhookStatus.COMPLETE;
+        this.completeAt = LocalDateTime.now();
+    }
+
+    public void updateEventStatus(String eventStatus) {
+        this.eventStatus = eventStatus;
+    }
 }

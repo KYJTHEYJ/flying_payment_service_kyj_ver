@@ -16,7 +16,7 @@ public class MemberPointLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long point_log_id;
+    private Long pointLogId;
 
     @Column(nullable = false, length = 100)
     private String orderNo;
@@ -25,16 +25,27 @@ public class MemberPointLog {
     private Integer point;
 
     @Column(nullable = false)
-    private LocalDateTime save_at;
+    private LocalDateTime saveAt;
 
     @Column(nullable = false)
-    private LocalDateTime expire_at;
+    private LocalDateTime expireAt;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 20, nullable = false)
     private MemberPointLogStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    public static MemberPointLog create(String OrderNo, Integer point, MemberPointLogStatus status, Member member) {
+        MemberPointLog log = new MemberPointLog();
+        log.orderNo = OrderNo;
+        log.point = point;
+        log.status = status;
+        log.member = member;
+        log.saveAt = LocalDateTime.now();
+        log.expireAt = LocalDateTime.now().plusYears(1);
+        return log;
+    }
 }
