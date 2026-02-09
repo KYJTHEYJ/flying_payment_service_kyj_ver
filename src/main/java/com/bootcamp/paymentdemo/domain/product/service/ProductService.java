@@ -23,17 +23,8 @@ public class ProductService {
     public List<ProductGetResponse> findAll() {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(product -> new ProductGetResponse(
-                        product.getId(),
-                        product.getName(),
-                        product.getDescription(),
-                        product.getCategory(),
-                        product.getPrice(),
-                        product.getStock(),
-                        product.getStatus(),
-                        product.getCreatedAt(),
-                        product.getUpdatedAt()
-                )).toList();
+                .map(ProductGetResponse::register)
+                .toList();
     }
 
     @Transactional(readOnly = true)
@@ -41,16 +32,6 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ServiceErrorException(ErrorEnum.ERR_NOT_FOUND_PRODUCT)
         );
-        return new ProductGetResponse(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getCategory(),
-                product.getPrice(),
-                product.getStock(),
-                product.getStatus(),
-                product.getCreatedAt(),
-                product.getUpdatedAt()
-        );
+        return ProductGetResponse.register(product);
     }
 }

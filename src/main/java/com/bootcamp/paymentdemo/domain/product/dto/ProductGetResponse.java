@@ -1,5 +1,6 @@
 package com.bootcamp.paymentdemo.domain.product.dto;
 
+import com.bootcamp.paymentdemo.domain.product.entity.Product;
 import com.bootcamp.paymentdemo.domain.product.entity.ProductStatus;
 import lombok.Getter;
 
@@ -8,36 +9,28 @@ import java.time.LocalDateTime;
 @Getter
 public class ProductGetResponse {
 
-    private final Long id;
-    private final String name;
-    private final String description;
-    private final String category;
-    private final Long price;
-    private final Long stock;
-    private final ProductStatus status;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
+    private Long id;
+    private String name;
+    private String description;
+    private String category;
+    private Long price;
+    private Long stock;
+    private ProductStatus status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public ProductGetResponse(
-            Long id,
-            String name,
-            String description,
-            String category,
-            Long price,
-            Long stock,
-            ProductStatus status,
-            LocalDateTime createdAt,
-            LocalDateTime updatedAt
-    ) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.category = category;
-        this.price = price;
-        this.stock = stock;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public static ProductGetResponse register(Product product) {
+        ProductGetResponse response = new ProductGetResponse();
+        response.getId();
+        response.getName();
+        response.getDescription();
+        response.getCategory();
+        response.getPrice();
+        response.getStock();
+        response.getStatus();
+        response.getCreatedAt();
+        response.getUpdatedAt();
+        return response;
     }
 
     // 프론트앤드 JSON ID 타입 String 변환
