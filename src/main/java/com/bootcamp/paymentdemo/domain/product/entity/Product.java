@@ -20,6 +20,8 @@ public class Product extends Base {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long id;
 
+    private String productUid;
+
     @Column(nullable = false, length = 100)
     private String name;
 

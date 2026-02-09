@@ -1,6 +1,7 @@
 package com.bootcamp.paymentdemo.domain.order.entity;
 
 import com.bootcamp.paymentdemo.common.entity.Base;
+import com.bootcamp.paymentdemo.domain.payment.entity.Payment;
 import com.bootcamp.paymentdemo.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -43,6 +44,9 @@ public class Order extends Base {
 
     @Column(nullable = false)
     private boolean deleted;
+
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
 
     private LocalDateTime orderAt;
     private LocalDateTime deletedAt;

@@ -45,7 +45,7 @@ public class Payment extends Base {
     private Boolean deleted;
     private LocalDateTime deletedAt;
 
-    public static Payment register(Order order, Long priceSnap, PaymentStatus status, LocalDateTime paymentAt, LocalDateTime refundAt) {
+    public static Payment register(Order order, Long priceSnap) {
         Payment payment = new Payment();
         payment.order = order;
         payment.portOneId = String.format(
@@ -55,9 +55,9 @@ public class Payment extends Base {
                 , UUID.randomUUID().toString().replace("-", "").substring(0, 12)
         );
         payment.priceSnap = priceSnap;
-        payment.status = status;
-        payment.paymentAt = paymentAt;
-        payment.refundAt = refundAt;
+        payment.status = PaymentStatus.PENDING;
+        payment.paymentAt = LocalDateTime.now();
+        payment.refundAt = null;
         payment.deleted = false;
         return payment;
     }
