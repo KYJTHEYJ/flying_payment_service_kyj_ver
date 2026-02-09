@@ -17,6 +17,8 @@ public class Product extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
+    private String productUid;
+
     @Column(nullable = false, length = 100)
     private String name;
 

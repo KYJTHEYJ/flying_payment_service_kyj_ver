@@ -66,10 +66,12 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/signup").permitAll()
 
                     // 5) 그 외 API는 인증 필요
-                    .requestMatchers("/api/**").authenticated()
+                    //.requestMatchers("/api/**").authenticated()
 
                     // 6) 나머지 전부 인증 필요
-                    .anyRequest().authenticated()
+                    //.anyRequest().authenticated()
+
+                    .anyRequest().permitAll()
             )
 
             // JWT 필터 추가
