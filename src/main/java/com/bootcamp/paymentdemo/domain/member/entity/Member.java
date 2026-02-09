@@ -50,6 +50,9 @@ public class Member extends Base {
     private Integer point;
 
     @Column(nullable = false)
+    private Integer totalPriceAmount;
+
+    @Column(nullable = false)
     private boolean deleted;
 
     private LocalDateTime deletedAt;
@@ -67,6 +70,7 @@ public class Member extends Base {
         member.grade = Grade.BRONZE;
         member.gradeAt = LocalDateTime.now();
         member.point = 0;
+        member.totalPriceAmount = 0;
         member.deleted = false;
         return member;
     }
