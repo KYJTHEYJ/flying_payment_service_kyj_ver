@@ -10,6 +10,12 @@ public class Constants {
     public static final String MSG_NOT_FOUND_MEMBER = "회원을 찾을 수 없습니다";
     public static final String MSG_NOT_FOUND_ORDER = "주문을 찾을 수 없습니다";
     public static final String MSG_NOT_FOUND_PRODUCT = "상품을 찾을 수 없습니다";
+
+    // 환불 관련 오류 메시지
+    public static final String MSG_NOT_FOUND_PAYMENT = "존재하지 않는 결제 정보입니다";
+    public static final String MSG_ALREADY_REFUNDED = "이미 환불 처리된 결제입니다";
+    public static final String MSG_INVALID_REFUND_STATUS = "환불 가능한 결제 상태가 아닙니다";
+
     //endregion 도메인 오류 메세지
 
     //region 서버 오류 메세지

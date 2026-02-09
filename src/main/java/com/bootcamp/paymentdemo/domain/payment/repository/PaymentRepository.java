@@ -17,4 +17,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
             AND o.orderId = :orderId
           """)
     Optional<Payment> findByOrderId(Long orderId);
+
+    Optional<Payment> findByPortOneId(String portOneId);
 }
