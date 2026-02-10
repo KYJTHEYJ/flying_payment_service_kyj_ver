@@ -11,6 +11,7 @@ public enum ErrorEnum {
     ERR_TOKEN_EMPTY(HttpStatus.UNAUTHORIZED, MSG_TOKEN_EMPTY),
     ERR_TOKEN_INVALID(HttpStatus.UNAUTHORIZED, MSG_AUTH_WRONG),
     ERR_TOKEN_EXPIRE(HttpStatus.UNAUTHORIZED, MSG_TOKEN_EXPIRE),
+    ERR_AUTH_FAIL(HttpStatus.UNAUTHORIZED, MSG_AUTH_FAIL),
     // endregion
 
     // region 회원 관련
@@ -25,6 +26,7 @@ public enum ErrorEnum {
 
     // region 주문 관련
     ERR_NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_ORDER),
+    ERR_NOT_FOUND_ORDER_PRODUCT(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_ORDER_PRODUCT),
     // endregion
 
     // region 환불 관련

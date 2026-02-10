@@ -24,7 +24,7 @@ public class ProductService {
         return products.stream()
                 .map(product ->
                     ProductGetResponse.register(
-                            product.getId()
+                            product.getProductId()
                             , product.getName()
                             , product.getDescription()
                             , product.getCategory()
@@ -41,6 +41,6 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ServiceErrorException(ErrorEnum.ERR_NOT_FOUND_PRODUCT)
         );
-        return ProductGetResponse.register(product.getId(), product.getName(), product.getDescription(), product.getCategory(), product.getPrice(), product.getStock(), product.getStatus());
+        return ProductGetResponse.register(product.getProductId(), product.getName(), product.getDescription(), product.getCategory(), product.getPrice(), product.getStock(), product.getStatus());
     }
 }

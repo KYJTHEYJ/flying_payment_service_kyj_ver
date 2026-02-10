@@ -27,10 +27,13 @@ public class Order extends Base {
     private String orderNo;
 
     @Column(nullable = false)
-    private Integer totalPrice;
+    private LocalDateTime orderAt;
 
     @Column(nullable = false)
-    private Integer price;
+    private Integer totalOrderPrice;
+
+    @Column(nullable = false)
+    private Integer totalActualPrice;
 
     @Column(nullable = false)
     private Integer usePoint;
@@ -43,37 +46,51 @@ public class Order extends Base {
     private OrderStatus status;
 
     @Column(nullable = false)
+    private OrderCurrency currency;
+
+    @Column(nullable = false)
     private boolean deleted;
 
-    @OneToOne(mappedBy = "order")
-    private Payment payment;
-
-    private LocalDateTime orderAt;
+    private LocalDateTime cancelAt;
     private LocalDateTime deletedAt;
 
-    public static Order register(
-            Member member,
-            String orderNo,
-            Integer totalPrice,
-            Integer price,
-            Integer usePoint,
-            Integer savePoint,
-            OrderStatus status,
-            LocalDateTime orderAt
+    private Order(
+            Member member
+            , String orderNo
+            , Integer totalOrderPrice
+            , Integer totalActualPrice
+            , Integer usePoint
+            , Integer savePoint
     ) {
-        Order order = new Order();
-        order.member = member;
-        order.orderNo = orderNo;
-        order.totalPrice = totalPrice;
-        order.price = price;
-        order.usePoint = usePoint;
-        order.savePoint = savePoint;
-        order.status = status;
-        order.orderAt = orderAt;
-        order.deleted = false;
-        order.deletedAt = null;
+        this.member = member;
+        this.orderAt = LocalDateTime.now();
+        this.orderNo = orderNo;
+        this.totalOrderPrice = totalOrderPrice;
+        this.totalActualPrice = totalActualPrice;
+        this.usePoint = usePoint;
+        this.savePoint = savePoint;
+        this.status = OrderStatus.PENDING;
+        this.currency = OrderCurrency.KRW; // 아직은 원화 밖에 지원 안함
+        this.cancelAt = null;
+        this.deleted = false;
+        this.deletedAt = null;
+    }
 
-        return order;
+    public static Order register(
+            Member member
+            , String orderNo
+            , Integer totalOrderPrice
+            , Integer totalActualPrice
+            , Integer usePoint
+            , Integer savePoint
+    ) {
+        return new Order(member
+                , orderNo
+                , totalOrderPrice
+                , totalActualPrice
+                , usePoint
+                , savePoint
+        );
     }
 
     public void updateStatus(OrderStatus status) {
@@ -83,5 +100,4 @@ public class Order extends Base {
             this.deletedAt = LocalDateTime.now();
         }
     }
-
 }
