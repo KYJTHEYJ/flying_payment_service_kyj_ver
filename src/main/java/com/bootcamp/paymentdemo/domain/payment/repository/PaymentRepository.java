@@ -1,6 +1,5 @@
 package com.bootcamp.paymentdemo.domain.payment.repository;
 
-import com.bootcamp.paymentdemo.domain.order.entity.Order;
 import com.bootcamp.paymentdemo.domain.payment.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +19,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     Optional<Payment> findByOrderId(@Param("order_id") Long orderId);
 
     Optional<Payment> findByPortOneId(String portOneId);
+
+    Optional<Payment> findByPortOneIdAndDeletedFalse(String portOneId);
 }

@@ -24,18 +24,21 @@ public class DummyDataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        productRepository.deleteAll();
+        //productRepository.deleteAll();
 
-        List<Product> products = new ArrayList<>();
+        if(productRepository.findAll().isEmpty()) {
+            List<Product> products = new ArrayList<>();
 
-        products.add(Product.register(
-                "귤 1박스","과일", "제주도 달콤상큼한 귤", 1000L, 10L, ProductStatus.SOLDOUT));
-        products.add(Product.register(
-                "달걀 30개", "신선 식품", "싱싱한 1급 달걀",1500L, 50L, ProductStatus.SALES));
-        products.add(Product.register(
-                "거위털 롱패딩", "패션/잡화", "러시아에서도 버틸 수 있는 따뜻한 롱패딩", 2000L, 90L, ProductStatus.SALES));
-        products.add(Product.register(
-                "샘성 노트북", "전자 제품", "신기술 탑재 2026 신상 노트북", 2100L, 150L, ProductStatus.SALES));
-        productRepository.saveAll(products);
+            //FIXME Category Enum 으로 관리하자
+            products.add(Product.register(
+                    "귤 1박스", "FOOD", "제주도 달콤상큼한 귤", 1000L, 10L));
+            products.add(Product.register(
+                    "달걀 30개", "FOOD", "싱싱한 1급 달걀", 1500L, 50L));
+            products.add(Product.register(
+                    "거위털 롱패딩", "CLOTH", "러시아에서도 버틸 수 있는 따뜻한 롱패딩", 2000L, 90L));
+            products.add(Product.register(
+                    "샘성 노트북", "ELECTRONIC", "신기술 탑재 2026 신상 노트북", 2100L, 150L));
+            productRepository.saveAll(products);
+        }
     }
 }

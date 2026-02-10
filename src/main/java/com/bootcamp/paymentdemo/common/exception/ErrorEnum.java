@@ -29,6 +29,10 @@ public enum ErrorEnum {
     ERR_NOT_FOUND_ORDER_PRODUCT(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_ORDER_PRODUCT),
     // endregion
 
+    // region 결제 관련
+    ERR_ALREADY_PAYMENT_COMPLETED(HttpStatus.BAD_REQUEST, MSG_ALREADY_PAYMENT_COMPLETED),
+    // endregion
+
     // region 환불 관련
     ERR_NOT_FOUND_PAYMENT(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_PAYMENT),
     ERR_ALREADY_REFUNDED(HttpStatus.BAD_REQUEST, MSG_ALREADY_REFUNDED),

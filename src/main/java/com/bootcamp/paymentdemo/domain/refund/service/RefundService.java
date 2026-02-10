@@ -40,7 +40,7 @@ public class RefundService {
         validateRefundAvailability(payment);
 
         // 환불 기록 및 상태 변경
-        Refund refund = Refund.register(payment, payment.getPriceSnap(), RefundStatus.REFUNDED, "웹훅 취소");
+        Refund refund = Refund.register(payment, Long.valueOf(payment.getPriceSnap()), RefundStatus.REFUNDED, "웹훅 취소");
         refundRepository.save(refund);
         payment.updateStatus(PaymentStatus.REFUNDED);
         order.updateStatus(OrderStatus.REFUNDED);
@@ -54,13 +54,13 @@ public class RefundService {
         // 포인트 복구
         if (order.getUsePoint() > 0) {
             member.addPoint(order.getUsePoint());
-            memberPointLogRepository.save(MemberPointLog.create(order.getOrderNo(), order.getUsePoint(), MemberPointLogStatus.RECOVER, member));
+            memberPointLogRepository.save(MemberPointLog.register(order.getOrderNo(), order.getUsePoint(), MemberPointLogStatus.RECOVER, member));
         }
 
         // 적립 취소
         if (order.getSavePoint() > 0) {
             member.minusPoint(order.getSavePoint());
-            memberPointLogRepository.save(MemberPointLog.create(order.getOrderNo(), order.getSavePoint(), MemberPointLogStatus.CANCEL_EARN, member));
+            memberPointLogRepository.save(MemberPointLog.register(order.getOrderNo(), order.getSavePoint(), MemberPointLogStatus.CANCEL_EARN, member));
         }
     }
 
