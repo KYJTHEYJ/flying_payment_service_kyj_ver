@@ -7,17 +7,31 @@ import static com.bootcamp.paymentdemo.common.Constants.*;
 
 @Getter
 public enum ErrorEnum {
+    // region 인증 관련
+    ERR_TOKEN_EMPTY(HttpStatus.UNAUTHORIZED, MSG_TOKEN_EMPTY),
+    ERR_TOKEN_INVALID(HttpStatus.UNAUTHORIZED, MSG_AUTH_WRONG),
+    ERR_TOKEN_EXPIRE(HttpStatus.UNAUTHORIZED, MSG_TOKEN_EXPIRE),
+    // endregion
+
+    // region 회원 관련
     ERR_NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_MEMBER),
+    ERR_DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, MSG_DUPLICATE_EMAIL),
+    ERR_NOT_MATCH_LOGIN(HttpStatus.UNAUTHORIZED, MSG_NOT_MATCH_LOGIN),
+    // endregion
+
+    // region 상품 관련
     ERR_NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_PRODUCT),
-      
-    // 환불 관련
+    // endregion
+
+    // region 주문 관련
+    ERR_NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_ORDER),
+    // endregion
+
+    // region 환불 관련
     ERR_NOT_FOUND_PAYMENT(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_PAYMENT),
     ERR_ALREADY_REFUNDED(HttpStatus.BAD_REQUEST, MSG_ALREADY_REFUNDED),
-    ERR_INVALID_REFUND_STATUS(HttpStatus.BAD_REQUEST, MSG_INVALID_REFUND_STATUS),
-
-    // member exception
-    ERR_DUPLICATE_EMAIL(HttpStatus.BAD_REQUEST, MSG_DUPLICATE_EMAIL),
-    ERR_NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, MSG_NOT_FOUND_ORDER);
+    ERR_INVALID_REFUND_STATUS(HttpStatus.BAD_REQUEST, MSG_INVALID_REFUND_STATUS);
+    // endregion
 
     private final HttpStatus status;
     private final String message;

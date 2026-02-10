@@ -8,15 +8,12 @@ import com.bootcamp.paymentdemo.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class MemberController {
-
     private final MemberService memberService;
 
     @PostMapping("/signup")
@@ -26,7 +23,7 @@ public class MemberController {
     }
 
     // TODO 결제 테스트용, 추후 삭제 필요
-    @GetMapping("/api/users")
+    @GetMapping("/users")
     public ResponseEntity<SearchMemberResponse> getUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(new SearchMemberResponse(
                 "CUST-TESTUUID"

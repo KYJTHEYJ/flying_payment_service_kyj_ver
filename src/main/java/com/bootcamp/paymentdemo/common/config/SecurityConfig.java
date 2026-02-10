@@ -10,12 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -52,29 +48,28 @@ public class SecurityConfig {
 
             // 요청 권한 설정
             .authorizeHttpRequests(authorize -> authorize
-                     // 1) 정적 리소스
+                     // 정적 리소스
                     .requestMatchers(toStaticResources().atCommonLocations()).permitAll()
 
-                    // 2) 템플릿 페이지 렌더링
+                    // 템플릿 페이지 렌더링
                     .requestMatchers(HttpMethod.GET, "/").permitAll()
                     .requestMatchers(HttpMethod.GET, "/pages/**").permitAll()
 
-                    // 3) 공개 API
+                    // 공개 API
                     .requestMatchers(HttpMethod.GET, "/api/public/**").permitAll()
 
-                    // 4) 인증 API
-                    .requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/signup").permitAll()
+                    // 인증 API
+                    .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/auth/refresh").permitAll()
 
-                    // 웹훅
-                    .requestMatchers("/api/webhooks/**").permitAll()
+                    // 회원가입
+                    .requestMatchers(HttpMethod.POST, "/api/signup").permitAll()
 
-                    // 5) 그 외 API는 인증 필요
-                    //.requestMatchers("/api/**").authenticated()
+                    // 그 외 API는 인증 필요
+                    .requestMatchers("/api/**").authenticated()
 
-                    // 6) 나머지 전부 인증 필요
-                    //.anyRequest().authenticated()
-
-                    .anyRequest().permitAll()
+                    // 나머지 전부 인증 필요
+                    .anyRequest().authenticated()
             )
 
             // JWT 필터 추가
@@ -93,7 +88,10 @@ public class SecurityConfig {
 
     /**
      * Admin 계정 (InMemory - 데모용)
+     * - UserDetailServiceImple 이 @Service Component 로 등록되어 의미가 없음
+     * - 순환 참조되어 에러 발생하니 주석 해제 말 것
      */
+    /*
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails admin = User.builder()
@@ -104,6 +102,7 @@ public class SecurityConfig {
 
         return new InMemoryUserDetailsManager(admin);
     }
+    */
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) {

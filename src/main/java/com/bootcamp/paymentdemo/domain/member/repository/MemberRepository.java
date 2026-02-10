@@ -3,7 +3,10 @@ package com.bootcamp.paymentdemo.domain.member.repository;
 import com.bootcamp.paymentdemo.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+import java.util.Optional;
 
-    boolean existsByEmail(String email);
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    boolean existsByEmailAndDeletedFalse(String email);
+
+    Optional<Member> findByEmailAndDeletedFalse(String email);
 }
