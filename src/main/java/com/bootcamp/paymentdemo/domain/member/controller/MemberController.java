@@ -21,16 +21,4 @@ public class MemberController {
         SaveMemberResponse response = memberService.signup(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.success("201", "회원가입 성공", response));
     }
-
-    // TODO 결제 테스트용, 추후 삭제 필요
-    @GetMapping("/users")
-    public ResponseEntity<SearchMemberResponse> getUsers() {
-        return ResponseEntity.status(HttpStatus.OK).body(new SearchMemberResponse(
-                "CUST-TESTUUID"
-                , "test@test.com"
-                , "테스트유저"
-                , "010-0000-0000"
-                ,0L
-        ));
-    }
 }

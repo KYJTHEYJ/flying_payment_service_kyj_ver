@@ -26,8 +26,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static com.bootcamp.paymentdemo.common.Constants.MSG_AUTH_WRONG;
-import static com.bootcamp.paymentdemo.common.Constants.MSG_TOKEN_EMPTY;
+import static com.bootcamp.paymentdemo.common.Constants.*;
 import static org.springframework.boot.security.autoconfigure.web.servlet.PathRequest.toStaticResources;
 
 /**
@@ -54,6 +53,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             , patternParser.parse("/js/**")
             , patternParser.parse("/images/**")
             , patternParser.parse("/webjars/**")
+            , patternParser.parse("/bootstrap/**")
+            , patternParser.parse("/.well-known/**")
             , patternParser.parse("/favicon.ico")
             , patternParser.parse("/static/**")
             , patternParser.parse("/api/public/**")
@@ -77,7 +78,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = getJwtFromRequest(request);
 
             if(token == null) {
-                log.error("액세스 토큰 없음");
+                log.error("액세스 토큰 없음 : {}", request.getRequestURI());
                 BaseResponse<Void> baseResponse = BaseResponse.fail(HttpStatus.UNAUTHORIZED.name(), MSG_TOKEN_EMPTY, null);
                 response.setContentType("application/json; charset=UTF-8");
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -87,7 +88,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // AccessToken 블랙리스트 조회
             if(blackAccessTokenRepository.existsByAccessToken(token)) {
-                log.error("블랙 리스트 등록 토큰 사용 감지");
+                log.error("블랙 리스트 등록 토큰 사용 감지 : {}", request.getRequestURI());
                 BaseResponse<Void> baseResponse = BaseResponse.fail(HttpStatus.UNAUTHORIZED.name(), MSG_AUTH_WRONG, null);
                 response.setContentType("application/json; charset=UTF-8");
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -115,9 +116,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            logger.error("JWT 인증 실패", e);
+            logger.error("JWT 인증 필터 오류 발생", e);
 
-            BaseResponse<Void> baseResponse = BaseResponse.fail(HttpStatus.UNAUTHORIZED.name(), MSG_AUTH_WRONG, null);
+            BaseResponse<Void> baseResponse = BaseResponse.fail(HttpStatus.UNAUTHORIZED.name(), MSG_AUTH_FAIL, null);
             response.setContentType("application/json; charset=UTF-8");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write(objectMapper.writeValueAsString(baseResponse));

@@ -9,6 +9,7 @@ public class Constants {
     public static final String MSG_TOKEN_EMPTY = "인증 정보가 없습니다";
     public static final String MSG_TOKEN_EXPIRE = "인증 정보가 만료 되었습니다";
     public static final String MSG_AUTH_WRONG = "인증 정보가 올바르지 않습니다";
+    public static final String MSG_AUTH_FAIL = "인증 처리가 실패 하였습니다";
     public static final String MSG_LOGOUT = "로그아웃 되었습니다";
     // endregion
 
@@ -21,6 +22,7 @@ public class Constants {
 
     // region 주문 관련 메세지
     public static final String MSG_NOT_FOUND_ORDER = "주문을 찾을 수 없습니다";
+    public static final String MSG_NOT_FOUND_ORDER_PRODUCT = "주문하려는 상품을 찾을 수 없습니다";
     // endregion
 
     // region 상품 관련 메세지

@@ -41,23 +41,29 @@ public class ProductOrder extends Base {
 
     private LocalDateTime deletedAt;
 
-    public static ProductOrder register(
-            Product product,
-            Order order,
-            String nameSnap,
-            Long priceSnap,
-            Long quantity
+    private ProductOrder(
+            Product product
+            , Order order
+            , String nameSnap
+            , Long priceSnap
+            , Long quantity
     ) {
-        ProductOrder productOrder = new ProductOrder();
+        this.nameSnap = nameSnap;
+        this.priceSnap = priceSnap;
+        this.quantity = quantity;
+        this.product = product;
+        this.order = order;
+        this.deleted = false;
+        this.deletedAt = null;
+    }
 
-        productOrder.product = product;
-        productOrder.order = order;
-        productOrder.nameSnap = nameSnap;
-        productOrder.priceSnap = priceSnap;
-        productOrder.quantity = quantity;
-        productOrder.deleted = false;
-        productOrder.deletedAt = null;
-
-        return productOrder;
+    public static ProductOrder register(
+            Product product
+            , Order order
+            , String nameSnap
+            , Long priceSnap
+            , Long quantity
+    ) {
+        return new ProductOrder(product, order, nameSnap, priceSnap, quantity);
     }
 }

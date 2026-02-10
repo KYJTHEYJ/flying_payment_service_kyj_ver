@@ -46,7 +46,7 @@ public class RefundService {
         order.updateStatus(OrderStatus.REFUNDED);
 
         // 누적 결제 금액 차감
-        member.subtractTotalPriceAmount(order.getPrice());
+        member.subtractTotalPriceAmount(order.getTotalActualPrice());
 
         // 등급 재계산 호출
         updateMemberGrade(member);

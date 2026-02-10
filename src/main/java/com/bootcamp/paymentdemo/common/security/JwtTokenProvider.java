@@ -1,9 +1,11 @@
 package com.bootcamp.paymentdemo.common.security;
 
+import com.bootcamp.paymentdemo.common.exception.ErrorEnum;
+import com.bootcamp.paymentdemo.common.exception.ServiceErrorException;
 import com.bootcamp.paymentdemo.domain.member.entity.MemberRole;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -125,14 +127,15 @@ public class JwtTokenProvider {
                 .build()
                 .parseSignedClaims(token);
             return true;
-        } catch (Exception e) {
-            // TODO: 구체적인 예외 처리 구현
-            // - ExpiredJwtException: 만료된 토큰
-            // - MalformedJwtException: 잘못된 형식
-            // - SignatureException: 서명 오류
-
-            log.error("Invalid token error : {}", e.getMessage());
-            return false;
+        } catch (ExpiredJwtException e) {
+            log.error("만료 토큰 오류 : {}", e.getMessage());
+            throw new ServiceErrorException(ErrorEnum.ERR_TOKEN_INVALID);
+        } catch (MalformedJwtException e) {
+            log.error("토큰 형식 오류 : {}", e.getMessage());
+            throw new ServiceErrorException(ErrorEnum.ERR_TOKEN_INVALID);
+        } catch (JwtException e) {
+            log.error("토큰 검증 오류 : {}", e.getMessage());
+            throw new ServiceErrorException(ErrorEnum.ERR_TOKEN_INVALID);
         }
     }
 }
