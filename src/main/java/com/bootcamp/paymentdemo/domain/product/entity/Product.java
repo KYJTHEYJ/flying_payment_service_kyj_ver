@@ -44,25 +44,38 @@ public class Product extends Base {
 
     private LocalDateTime deletedAt;
 
+    private Product(String name, String category, String description, Long price, Long stock) {
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.status = ProductStatus.SALES;
+        this.deleted = false;
+        this.deletedAt = null;
+    }
+
     public static Product register(
             String name,
             String category,
             String description,
             Long price,
-            Long stock,
-            ProductStatus status
+            Long stock
     ) {
-        Product product = new Product();
+        return new Product(name, category, description, price, stock);
+    }
 
-        product.name = name;
-        product.category = category;
-        product.description = description;
-        product.price = price;
-        product.stock = stock;
-        product.status = status;
-        product.deleted = false;
-        product.deletedAt = null;
+    public void updateStatus(ProductStatus status) {
+        this.status = status;
+    }
 
-        return product;
+    public void updateStock(Long stock) {
+        this.stock -= stock;
+
+        if(this.stock > 0) {
+            this.status = ProductStatus.SALES;
+        } else {
+            this.status = ProductStatus.SOLDOUT;
+        }
     }
 }

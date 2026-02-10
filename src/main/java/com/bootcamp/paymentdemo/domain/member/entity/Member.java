@@ -87,7 +87,10 @@ public class Member extends Base {
         if (this.totalPriceAmount == null) {
             this.totalPriceAmount = 0;
         }
+
         this.totalPriceAmount += amount;
+
+        //FIXME grade 반영 로직 추가되어야함
     }
 
     public void subtractTotalPriceAmount(Integer amount) {

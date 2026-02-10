@@ -102,7 +102,6 @@ public class AuthController {
         authService.logout(accessToken, email);
 
         return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(HttpStatus.OK.name(), MSG_LOGOUT, null));
-
     }
 
     // Refresh Token 을 통한 재발급

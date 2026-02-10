@@ -13,5 +13,5 @@ public class CreatePaymentRequest {
     @Min(value = 1, message = "결제 금액은 1원 이상이여야 합니다")
     private Integer totalAmount;
     @Min(value = 0, message = "포인트 결제 금액은 0원 이상이여야 합니다")
-    private Integer pointToUse;
+    private Integer pointsToUse;
 }

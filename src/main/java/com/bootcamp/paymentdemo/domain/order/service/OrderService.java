@@ -48,7 +48,7 @@ public class OrderService {
             totalOrderPrice += (int) (product.getPrice() * orderProduct.quantity());
         }
 
-        //FIXME 포인트는 포인트 결제에서만? 현재는 처리 할 수가 없음
+        // 초기 주문 셋업
         Order savedOrder = Order.register(member, orderNo, totalOrderPrice, totalOrderPrice, 0, (int) Math.floor(totalOrderPrice * member.getGrade().getPointRate() * 0.01));
         orderRepository.save(savedOrder);
 

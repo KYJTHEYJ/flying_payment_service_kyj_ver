@@ -31,7 +31,7 @@ public class Payment extends Base {
     private String portOneId;
 
     @Column(nullable = false, updatable = false)
-    private Long priceSnap;
+    private Integer priceSnap;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
@@ -45,7 +45,7 @@ public class Payment extends Base {
     private Boolean deleted;
     private LocalDateTime deletedAt;
 
-    public static Payment register(Order order, Long priceSnap) {
+    public static Payment register(Order order, Integer priceSnap) {
         Payment payment = new Payment();
         payment.order = order;
         payment.portOneId = String.format(

@@ -29,6 +29,10 @@ public class Constants {
     public static final String MSG_NOT_FOUND_PRODUCT = "상품을 찾을 수 없습니다";
     // endregion
 
+    // region 결제 관련 메세지
+    public static final String MSG_ALREADY_PAYMENT_COMPLETED = "이미 결제 확정 처리된 결제 건입니다";
+    // endregion
+
     // region 환불 관련 메세지
     public static final String MSG_NOT_FOUND_PAYMENT = "존재하지 않는 결제 정보입니다";
     public static final String MSG_ALREADY_REFUNDED = "이미 환불 처리된 결제입니다";

@@ -100,4 +100,20 @@ public class Order extends Base {
             this.deletedAt = LocalDateTime.now();
         }
     }
+
+    // 실 결제 금액 업데이트
+    public void updateActualPrice(Integer actualPrice) {
+        this.totalActualPrice = actualPrice;
+    }
+
+    // 포인트 소모 업데이트
+    public void updateSavePoint(Integer savePoint) {
+        this.savePoint = savePoint;
+    }
+
+    // 포인트 소모 업데이트
+    public void updateUsePoint(Integer usePoint) {
+        this.usePoint = usePoint;
+        this.totalActualPrice = totalOrderPrice - usePoint;
+    }
 }
