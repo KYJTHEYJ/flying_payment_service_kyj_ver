@@ -1,0 +1,7 @@
+package com.bootcamp.paymentdemo.common.auth.dto;
+
+public record RefreshResponse(
+        String accessToken,
+        String refreshToken
+) {
+}

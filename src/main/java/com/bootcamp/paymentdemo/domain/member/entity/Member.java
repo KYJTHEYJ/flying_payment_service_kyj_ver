@@ -57,15 +57,13 @@ public class Member extends Base {
 
     private LocalDateTime deletedAt;
 
-    private String refreshToken;
-
     public static Member register(SaveMemberRequest request, String encodedPassword) {
         Member member = new Member();
         member.name = request.getName();
         member.email = request.getEmail();
         member.password = encodedPassword;
         member.phoneNo = request.getPhone();
-        member.memberUid = "CUST-" + UUID.randomUUID();
+        member.memberUid = "CUST-" + UUID.randomUUID().toString().substring(0, 12);
         member.role = MemberRole.ROLE_USER;
         member.grade = Grade.BRONZE;
         member.gradeAt = LocalDateTime.now();

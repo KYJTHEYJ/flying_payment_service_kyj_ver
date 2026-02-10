@@ -20,7 +20,7 @@
 #    클라이언트는 방법 2, 3을 사용하면 수정 불필요!
 
 api:
-  base-url: http://localhost:8080
+  base-url: http://localhost:8090
 
   # API 엔드포인트 및 계약 정의
   endpoints:
@@ -88,7 +88,7 @@ api:
               description: 에러 메시지 (실패 시)
 
     get-current-user:
-      url: /api/users
+      url: /api/auth/me
       method: GET
       description: 현재 로그인한 사용자 정보 조회
       response:
